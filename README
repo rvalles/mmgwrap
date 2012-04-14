@@ -1,0 +1,15 @@
+Homepage: https://github.com/rvalles/mmgtool
+
+Supported Hardware
+------------------
+- Sagem F@st 2604
+
+Instructions
+------------
+Create a config.xml using config_example.xml as reference.
+ln -s <themodem.py> Modem.py
+./mmgwrap.py
+
+-------
+Roc Vallès.
+<vallesroc @spm.tst @gmail.com>

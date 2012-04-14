@@ -1,0 +1,4 @@
+*.swp
+*.pyc
+Modem.py
+config.xml
