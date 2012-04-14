@@ -1,3 +1,5 @@
+Wrapper that abstracts and provides xmlrpc access to some basic functionality present on modems and routers.
+
 Homepage: https://github.com/rvalles/mmgwrap
 
 Supported Hardware
