@@ -17,15 +17,16 @@ class Modem(object):
 		opener = urllib2.build_opener(auth_handler)
 		urllib2.install_opener(opener)
 		self.up = self.down = 0
+		self.timeout = 2
 		self.refreshSpeed()
 	def reboot(self):
 		try:
-			urllib2.urlopen(self.urlbase+"/rebootinfo.cgi",None,1)
+			urllib2.urlopen(self.urlbase+"/rebootinfo.cgi",None,self.timeout)
 		except:
 			return
 	def __fetchSpeed(self):
 		try:
-			page = urllib2.urlopen(self.urlbase+"/wancfg.cmd?action=refresh",None,1)
+			page = urllib2.urlopen(self.urlbase+"/wancfg.cmd?action=refresh",None,self.timeout)
 		except:
 			return (0,0)
 		soup = BeautifulSoup(page.read())
@@ -53,6 +54,6 @@ class Modem(object):
 		return int(time()-self.lastConnect)
 	def resync(self):
 		try:
-			urllib2.urlopen(self.urlbase+"/adslcfgadv.cmd?adslTestMode=0",None,1)
+			urllib2.urlopen(self.urlbase+"/adslcfgadv.cmd?adslTestMode=0",None,self.timeout)
 		except:
 			return
