@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<dslminspeedcfg>
+<url>http://127.0.0.1:12345/</url>
+<downstream>10000</downstream>
+<upstream>500</upstream>
+<uptime>3600</uptime>
+<pollinterval>60</pollinterval>
+</dslminspeedcfg>
