@@ -17,7 +17,7 @@ class Modem(object):
 		opener = urllib2.build_opener(auth_handler)
 		urllib2.install_opener(opener)
 		self.up = self.down = 0
-		self.timeout = 2
+		self.timeout = 3
 		self.refreshSpeed()
 	def reboot(self):
 		try:

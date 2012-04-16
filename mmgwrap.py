@@ -9,20 +9,28 @@ from ModemRpc import ModemRpc
 def main():
 	config = libxml2.parseFile("config.xml")
 	for node in config.xpathEval('/mwmwrapcfg/host'):
-		host=node.content
+		host = node.content
 	for node in config.xpathEval('/mwmwrapcfg/user'):
-		user=node.content
+		user = node.content
 	for node in config.xpathEval('/mwmwrapcfg/password'):
-		password=node.content
+		password = node.content
+	bindip = "0.0.0.0"
 	for node in config.xpathEval('/mwmwrapcfg/bindip'):
-		bindip=node.content
+		bindip = node.content
+	bindport = "12345"
 	for node in config.xpathEval('/mwmwrapcfg/bindport'):
-		bindport=int(node.content)
+		bindport = int(node.content)
+	pollinterval = 2
 	for node in config.xpathEval('/mwmwrapcfg/pollinterval'):
-		pollinterval=int(node.content)
+		pollinterval = int(node.content)
+	verbose = True
+	for node in config.xpathEval('/mwmwrapcfg/verbose'):
+		if node.content == "False":
+			verbose = False
 	modem = Modem(host,user,password)
-	print "Listening on: http://"+bindip+":"+str(bindport)+"/"
-	server = DocXMLRPCServer.DocXMLRPCServer(tuple([bindip, bindport]))
+	if verbose:
+		print "Listening on: http://"+bindip+":"+str(bindport)+"/"
+	server = DocXMLRPCServer.DocXMLRPCServer((bindip, bindport), DocXMLRPCServer.DocXMLRPCRequestHandler, verbose)
 	rpc = ModemRpc(modem)
 	server.register_instance(rpc)
 	server.timeout = pollinterval

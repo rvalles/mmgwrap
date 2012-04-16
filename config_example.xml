@@ -6,4 +6,5 @@
 <bindip>0.0.0.0</bindip>
 <bindport>12345</bindport>
 <pollinterval>2</pollinterval>
+<verbose>True</verbose>
 </mwmwrapcfg>
