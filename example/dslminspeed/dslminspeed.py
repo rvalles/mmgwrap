@@ -16,9 +16,15 @@ def main():
 		minuptime = int(node.content)
 	for node in config.xpathEval('/dslminspeedcfg/pollinterval'):
 		pollinterval = int(node.content)
-	mmgwrap = xmlrpclib.ServerProxy(url)
 	logging.basicConfig(format='%(asctime)s %(message)s')
-	uptime = mmgwrap.getUptime()
+	mmgwrap = xmlrpclib.ServerProxy(url)
+	"""Let's try and wait for the backend to be up. Later, if the backend dies at any point, we'll not handle that and just die too."""
+	while not 'uptime' in locals():
+		try:
+			uptime = mmgwrap.getUptime()
+		except:
+			logging.warning("Backend is not up yet. Retrying in a second.");
+			time.sleep(1)
 	while True:
 		if uptime<minuptime:
 			time.sleep(minuptime-uptime)
