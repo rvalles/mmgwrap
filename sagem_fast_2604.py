@@ -41,7 +41,7 @@ class Modem(object):
 		return (int(down),int(up))
 	def refreshSpeed(self):
 		(down, up) = self.__fetchSpeed()
-		if self.down==0 and down!=0:
+		if (self.down==0 and down!=0) or self.down!=down or self.up!=up:
 			self.lastConnect = float(time())
 		self.down = down
 		self.up = up
